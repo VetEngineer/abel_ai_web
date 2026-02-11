@@ -5,191 +5,153 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import {
   BRAND_PRIMARY_HEX,
-  BRAND_DESTRUCTIVE_HEX,
   BRAND_BACKGROUND_HEX,
   BRAND_GRID_LINE,
 } from "@/constants/brand-colors";
 
 /* ── Config ── */
-const SPHERE_COUNT = 300;
+const PARTICLE_COUNT = 500;
 const CLUSTER_RADIUS = 4.5;
 const ACCENT = new THREE.Color(BRAND_PRIMARY_HEX);
 
-/* ── Fresnel shader for dark spheres with edge glow ── */
-const fresnelVertex = /* glsl */ `
-  varying vec3 vNormal;
-  varying vec3 vViewDir;
-  varying vec3 vWorldPos;
+/* ── Particle shaders ── */
+const particleVertex = /* glsl */ `
+  attribute float aSize;
+  attribute float aOpacity;
+  attribute float aSeed;
+  varying float vOpacity;
+  varying float vSeed;
 
   void main() {
-    vec4 worldPos = instanceMatrix * vec4(position, 1.0);
-    worldPos = modelMatrix * worldPos;
-    vWorldPos = worldPos.xyz;
-    vNormal = normalize(mat3(instanceMatrix) * normal);
-    vNormal = normalize(normalMatrix * vNormal);
-    vViewDir = normalize(cameraPosition - worldPos.xyz);
-    gl_Position = projectionMatrix * viewMatrix * worldPos;
+    vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+    gl_PointSize = min(aSize * (50.0 / -mvPosition.z), 24.0);
+    gl_Position = projectionMatrix * mvPosition;
+    vOpacity = aOpacity;
+    vSeed = aSeed;
   }
 `;
 
-const fresnelFragment = /* glsl */ `
+const particleFragment = /* glsl */ `
   uniform vec3 uColor;
-  uniform float uFresnelPower;
   uniform float uTime;
-
-  varying vec3 vNormal;
-  varying vec3 vViewDir;
-  varying vec3 vWorldPos;
+  varying float vOpacity;
+  varying float vSeed;
 
   void main() {
-    float fresnel = pow(1.0 - max(dot(vNormal, vViewDir), 0.0), uFresnelPower);
+    float d = length(gl_PointCoord - vec2(0.5));
+    if (d > 0.5) discard;
 
-    // Base: slight color tint
-    vec3 base = uColor * 0.1;
-    // Edge glow
-    vec3 glow = uColor * fresnel * 1.8;
-    // Subtle inner rim
-    float rim = pow(1.0 - max(dot(vNormal, vViewDir), 0.0), 1.5) * 0.25;
-    vec3 innerRim = uColor * rim;
+    // Soft glow falloff
+    float glow = 1.0 - smoothstep(0.0, 0.5, d);
+    glow = pow(glow, 1.5);
 
-    vec3 finalColor = base + glow + innerRim;
-    float alpha = 0.85 + fresnel * 0.15;
+    // Twinkle
+    float twinkle = sin(uTime * 1.5 + vSeed * 6.2831) * 0.2 + 0.8;
 
-    gl_FragColor = vec4(finalColor, alpha);
+    gl_FragColor = vec4(uColor, glow * vOpacity * twinkle);
   }
 `;
 
-/* ── Fibonacci sphere distribution ── */
-function fibonacciSphere(count: number, radius: number) {
-  const golden = Math.PI * (3 - Math.sqrt(5));
-  const points: { pos: [number, number, number]; layer: number }[] = [];
-
-  // Surface layer
-  for (let i = 0; i < count * 0.7; i++) {
-    const y = 1 - (i / (count * 0.7 - 1)) * 2;
-    const r = Math.sqrt(1 - y * y);
-    const theta = golden * i;
-    points.push({
-      pos: [
-        Math.cos(theta) * r * radius,
-        y * radius,
-        Math.sin(theta) * r * radius,
-      ],
-      layer: 0,
-    });
-  }
-
-  // Inner layers for volume
-  for (let i = 0; i < count * 0.3; i++) {
-    const y = 1 - (i / (count * 0.3 - 1)) * 2;
-    const r = Math.sqrt(1 - y * y);
-    const theta = golden * i * 1.3;
-    const innerR = radius * (0.5 + Math.random() * 0.3);
-    points.push({
-      pos: [
-        Math.cos(theta) * r * innerR,
-        y * innerR,
-        Math.sin(theta) * r * innerR,
-      ],
-      layer: 1,
-    });
-  }
-
-  return points;
-}
-
-/* ── Sphere cluster ── */
-function SphereCluster({
+/* ── Particle cloud ── */
+function ParticleCloud({
   mouseRef,
 }: {
   mouseRef: React.RefObject<THREE.Vector3 | null>;
 }) {
-  const meshRef = useRef<THREE.InstancedMesh>(null);
+  const pointsRef = useRef<THREE.Points>(null);
   const materialRef = useRef<THREE.ShaderMaterial>(null);
-  const dummy = useMemo(() => new THREE.Object3D(), []);
   const rotationRef = useRef({ x: 0, y: 0 });
 
-  const spheres = useMemo(() => fibonacciSphere(SPHERE_COUNT, CLUSTER_RADIUS), []);
+  const geometry = useMemo(() => {
+    const positions = new Float32Array(PARTICLE_COUNT * 3);
+    const sizes = new Float32Array(PARTICLE_COUNT);
+    const opacities = new Float32Array(PARTICLE_COUNT);
+    const seeds = new Float32Array(PARTICLE_COUNT);
+
+    const golden = Math.PI * (3 - Math.sqrt(5));
+    const surfaceCount = Math.floor(PARTICLE_COUNT * 0.7);
+
+    // Surface layer
+    for (let i = 0; i < surfaceCount; i++) {
+      const y = 1 - (i / (surfaceCount - 1)) * 2;
+      const r = Math.sqrt(1 - y * y);
+      const theta = golden * i;
+      positions[i * 3] = Math.cos(theta) * r * CLUSTER_RADIUS;
+      positions[i * 3 + 1] = y * CLUSTER_RADIUS;
+      positions[i * 3 + 2] = Math.sin(theta) * r * CLUSTER_RADIUS;
+      sizes[i] = 0.8 + Math.random() * 1.2;
+      opacities[i] = 0.3 + Math.random() * 0.7;
+      seeds[i] = Math.random();
+    }
+
+    // Inner volume
+    for (let i = surfaceCount; i < PARTICLE_COUNT; i++) {
+      const idx = i - surfaceCount;
+      const innerCount = PARTICLE_COUNT - surfaceCount;
+      const y = 1 - (idx / (innerCount - 1)) * 2;
+      const r = Math.sqrt(1 - y * y);
+      const theta = golden * idx * 1.3;
+      const innerR = CLUSTER_RADIUS * (0.3 + Math.random() * 0.4);
+      positions[i * 3] = Math.cos(theta) * r * innerR;
+      positions[i * 3 + 1] = y * innerR;
+      positions[i * 3 + 2] = Math.sin(theta) * r * innerR;
+      sizes[i] = 0.4 + Math.random() * 1.0;
+      opacities[i] = 0.2 + Math.random() * 0.5;
+      seeds[i] = Math.random();
+    }
+
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+    geo.setAttribute("aSize", new THREE.BufferAttribute(sizes, 1));
+    geo.setAttribute("aOpacity", new THREE.BufferAttribute(opacities, 1));
+    geo.setAttribute("aSeed", new THREE.BufferAttribute(seeds, 1));
+    return geo;
+  }, []);
 
   const uniforms = useMemo(
     () => ({
       uColor: { value: ACCENT },
-      uFresnelPower: { value: 2.5 },
       uTime: { value: 0 },
     }),
     []
   );
 
   useFrame(({ clock }) => {
-    const mesh = meshRef.current;
+    const points = pointsRef.current;
     const mouse = mouseRef.current;
-    if (!mesh) return;
+    if (!points) return;
 
     const t = clock.getElapsedTime();
-    uniforms.uTime.value = t;
+    if (materialRef.current) {
+      materialRef.current.uniforms.uTime.value = t;
+    }
 
-    // Gentle auto-rotation + mouse tilt
+    // Smooth rotation toward target
     const targetRotY = (mouse ? mouse.x * 0.04 : 0) + t * 0.08;
     const targetRotX = (mouse ? -mouse.y * 0.03 : 0) + Math.sin(t * 0.3) * 0.1;
     rotationRef.current.x += (targetRotX - rotationRef.current.x) * 0.02;
     rotationRef.current.y += (targetRotY - rotationRef.current.y) * 0.02;
 
-    const euler = new THREE.Euler(rotationRef.current.x, rotationRef.current.y, 0);
-    const quat = new THREE.Quaternion().setFromEuler(euler);
+    points.rotation.x = rotationRef.current.x;
+    points.rotation.y = rotationRef.current.y;
 
-    spheres.forEach((s, i) => {
-      const [bx, by, bz] = s.pos;
-
-      // Apply rotation
-      const vec = new THREE.Vector3(bx, by, bz).applyQuaternion(quat);
-
-      // Breathing animation
-      const breathe = 1 + Math.sin(t * 0.5 + i * 0.02) * 0.03;
-      vec.multiplyScalar(breathe);
-
-      dummy.position.copy(vec);
-      const baseScale = s.layer === 0 ? 0.34 : 0.26;
-      dummy.scale.setScalar(baseScale);
-      dummy.updateMatrix();
-      mesh.setMatrixAt(i, dummy.matrix);
-    });
-
-    mesh.instanceMatrix.needsUpdate = true;
+    // Breathing
+    const breathe = 1 + Math.sin(t * 0.5) * 0.03;
+    points.scale.setScalar(breathe);
   });
 
   return (
-    <instancedMesh ref={meshRef} args={[undefined, undefined, SPHERE_COUNT]}>
-      <sphereGeometry args={[1, 24, 24]} />
+    <points ref={pointsRef} geometry={geometry}>
       <shaderMaterial
         ref={materialRef}
-        vertexShader={fresnelVertex}
-        fragmentShader={fresnelFragment}
+        vertexShader={particleVertex}
+        fragmentShader={particleFragment}
         uniforms={uniforms}
         transparent
+        depthWrite={false}
+        blending={THREE.AdditiveBlending}
       />
-    </instancedMesh>
-  );
-}
-
-/* ── Cursor sphere ── */
-function CursorSphere({
-  mouseRef,
-}: {
-  mouseRef: React.MutableRefObject<THREE.Vector3>;
-}) {
-  const ref = useRef<THREE.Mesh>(null);
-
-  useFrame(() => {
-    const mesh = ref.current;
-    if (!mesh) return;
-    mesh.position.lerp(mouseRef.current, 0.06);
-  });
-
-  return (
-    <mesh ref={ref} position={[0, 0, 4]}>
-      <sphereGeometry args={[0.15, 24, 24]} />
-      <meshBasicMaterial color={BRAND_DESTRUCTIVE_HEX} transparent opacity={0.7} />
-    </mesh>
+    </points>
   );
 }
 
@@ -230,10 +192,8 @@ function Scene() {
   return (
     <>
       <color attach="background" args={[BRAND_BACKGROUND_HEX]} />
-
       <MouseTracker mouseRef={mouseRef} />
-      <SphereCluster mouseRef={mouseRef} />
-      <CursorSphere mouseRef={mouseRef} />
+      <ParticleCloud mouseRef={mouseRef} />
     </>
   );
 }
@@ -250,7 +210,7 @@ export function SplineScene({ className }: { className?: string }) {
         }}
       />
       <Canvas
-        camera={{ position: [0, 0, 7.5], fov: 50 }}
+        camera={{ position: [0, 0, 12], fov: 50 }}
         dpr={[1, 2]}
         gl={{ antialias: true, alpha: false }}
       >
