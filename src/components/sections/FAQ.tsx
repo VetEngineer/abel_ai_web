@@ -26,7 +26,7 @@ export function FAQ() {
               <AccordionTrigger className="text-base text-left">
                 {item.question}
               </AccordionTrigger>
-              <AccordionContent className="text-muted-foreground leading-relaxed">
+              <AccordionContent className="text-muted-foreground leading-relaxed break-keep">
                 {item.answer}
               </AccordionContent>
             </AccordionItem>
