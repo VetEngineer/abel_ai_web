@@ -250,7 +250,7 @@ export function SplineScene({ className }: { className?: string }) {
         }}
       />
       <Canvas
-        camera={{ position: [0, 0, 7.5], fov: 50 }}
+        camera={{ position: [1, 0, 8.5], fov: 50 }}
         dpr={[1, 2]}
         gl={{ antialias: true, alpha: false }}
       >
