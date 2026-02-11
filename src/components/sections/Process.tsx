@@ -5,10 +5,10 @@ export function Process() {
     <section id="process" className="relative scroll-mt-20 py-24 px-6">
       <div className="absolute inset-0 bg-gradient-to-bl from-brand-purple/5 via-transparent to-space-blue/5" />
       <div className="relative mx-auto max-w-4xl">
-        <h2 className="text-center text-3xl font-bold tracking-tight break-keep sm:text-4xl">
+        <h2 className="text-center text-3xl font-bold leading-tight tracking-tight break-keep sm:text-4xl">
           {PROCESS.title}
         </h2>
-        <p className="mx-auto mt-4 max-w-xl text-center leading-relaxed text-muted-foreground">
+        <p className="mx-auto mt-4 max-w-xl text-center leading-relaxed text-muted-foreground break-keep">
           {PROCESS.subtitle}
         </p>
 
@@ -37,7 +37,7 @@ export function Process() {
                     </span>
                   )}
                 </div>
-                <p className="mt-2 leading-relaxed text-muted-foreground">
+                <p className="mt-2 leading-relaxed text-muted-foreground break-keep">
                   {step.description}
                 </p>
                 <div className="mt-4">
@@ -50,7 +50,7 @@ export function Process() {
                         key={item}
                         className="flex items-start gap-2 text-sm text-muted-foreground"
                       >
-                        <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-primary/60" />
+                        <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-primary" />
                         {item}
                       </li>
                     ))}

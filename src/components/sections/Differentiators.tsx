@@ -6,10 +6,10 @@ export function Differentiators() {
       <div className="absolute inset-0 bg-gradient-to-tr from-space-blue/8 via-transparent to-brand-purple/8" />
       <div className="relative mx-auto max-w-4xl">
         <div className="text-center">
-          <h2 className="text-3xl font-bold tracking-tight break-keep sm:text-4xl">
+          <h2 className="text-3xl font-bold leading-tight tracking-tight break-keep sm:text-4xl">
             {DIFFERENTIATORS.title}
           </h2>
-          <p className="mt-4 leading-relaxed text-muted-foreground">
+          <p className="mt-4 leading-relaxed text-muted-foreground break-keep">
             {DIFFERENTIATORS.subtitle}
           </p>
         </div>
@@ -35,7 +35,7 @@ export function Differentiators() {
                 <span className="inline-block sm:hidden text-xs font-semibold text-muted-foreground mb-1">기존 방식</span>
                 <span className="block">{row.before}</span>
               </div>
-              <div className="px-6 py-4 text-sm font-medium bg-primary/5 sm:bg-transparent">
+              <div className="px-6 py-4 text-sm font-medium bg-primary/5">
                 <span className="inline-block sm:hidden text-xs font-semibold text-gradient mb-1">ABEL AI</span>
                 <span className="block">{row.after}</span>
               </div>
@@ -43,7 +43,7 @@ export function Differentiators() {
           ))}
         </div>
 
-        <p className="mt-10 text-center text-sm leading-relaxed text-muted-foreground whitespace-pre-line">
+        <p className="mt-10 text-center text-sm leading-relaxed text-muted-foreground break-keep whitespace-pre-line">
           {DIFFERENTIATORS.supporting}
         </p>
 

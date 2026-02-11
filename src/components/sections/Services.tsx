@@ -5,7 +5,7 @@ export function Services() {
     <section id="services" className="relative scroll-mt-20 py-24 px-6 border-y border-border/30">
       <div className="absolute inset-0 bg-gradient-to-tr from-space-blue/8 via-transparent to-brand-purple/8" />
       <div className="relative mx-auto max-w-6xl">
-        <h2 className="text-center text-3xl font-bold tracking-tight break-keep sm:text-4xl">
+        <h2 className="text-center text-3xl font-bold leading-tight tracking-tight break-keep sm:text-4xl">
           {SERVICES_SECTION.title}
         </h2>
 
@@ -24,7 +24,7 @@ export function Services() {
                 </p>
               </div>
 
-              <p className="text-sm leading-relaxed text-muted-foreground">
+              <p className="text-sm leading-relaxed text-muted-foreground break-keep">
                 {service.description}
               </p>
 

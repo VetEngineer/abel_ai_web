@@ -12,10 +12,10 @@ export function FinalCTA() {
       <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[400px] w-[400px] rounded-full bg-brand-purple/10 blur-[100px]" />
 
       <div className="relative mx-auto max-w-2xl text-center">
-        <h2 className="text-3xl font-bold tracking-tight break-keep sm:text-4xl md:text-5xl">
+        <h2 className="text-3xl font-bold leading-tight tracking-tight break-keep sm:text-4xl md:text-5xl">
           {FINAL_CTA.title}
         </h2>
-        <p className="mt-4 text-lg leading-relaxed text-muted-foreground whitespace-pre-line">
+        <p className="mt-4 text-lg leading-relaxed text-muted-foreground break-keep whitespace-pre-line">
           {FINAL_CTA.subtitle}
         </p>
 

@@ -6,10 +6,10 @@ export function Reality() {
       <div className="absolute inset-0 bg-gradient-to-br from-space-blue/8 via-brand-purple/5 to-transparent" />
       <div className="relative mx-auto max-w-4xl">
         <div className="text-center">
-          <h2 className="text-3xl font-bold tracking-tight break-keep sm:text-4xl">
+          <h2 className="text-3xl font-bold leading-tight tracking-tight break-keep sm:text-4xl">
             {REALITY.title}
           </h2>
-          <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
+          <p className="mt-4 text-lg leading-relaxed text-muted-foreground break-keep">
             {REALITY.subtitle}
           </p>
         </div>
@@ -29,7 +29,7 @@ export function Reality() {
         </div>
 
         <div className="mt-10 text-center">
-          <p className="text-muted-foreground leading-relaxed whitespace-pre-line">
+          <p className="text-muted-foreground leading-relaxed break-keep whitespace-pre-line">
             {REALITY.supporting}
           </p>
         </div>
