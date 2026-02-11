@@ -18,7 +18,7 @@ export function Insight() {
           {INSIGHT.cards.map((card) => (
             <div
               key={card.term}
-              className="rounded-xl border border-border bg-card p-8 transition-all duration-300 hover:border-primary/50"
+              className="rounded-xl border border-border bg-card p-8 transition-all duration-300 hover:border-primary/50 hover:glow-blue"
             >
               <p className="text-lg font-semibold leading-relaxed">
                 {card.result}
