@@ -2,8 +2,8 @@ import { REALITY } from "@/constants/content";
 
 export function Reality() {
   return (
-    <section className="relative py-24 px-6 border-y border-border/30">
-      <div className="absolute inset-0 bg-gradient-to-br from-space-blue/10 via-brand-purple/5 to-transparent" />
+    <section className="relative scroll-mt-20 py-24 px-6 border-y border-border/30">
+      <div className="absolute inset-0 bg-gradient-to-br from-space-blue/8 via-brand-purple/5 to-transparent" />
       <div className="relative mx-auto max-w-4xl">
         <div className="text-center">
           <h2 className="text-3xl font-bold tracking-tight break-keep sm:text-4xl">

@@ -14,7 +14,7 @@ export function Differentiators() {
           </p>
         </div>
 
-        <div className="mt-12 overflow-hidden rounded-xl border border-border bg-card/50">
+        <div className="mt-12 overflow-hidden rounded-xl border border-border bg-card">
           {/* Table header - Hidden on mobile, use visual indicators instead */}
           <div className="hidden sm:grid grid-cols-2 bg-card border-b border-border">
             <div className="border-r border-border px-6 py-4 text-sm font-semibold text-muted-foreground">
