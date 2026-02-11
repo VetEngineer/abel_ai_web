@@ -6,22 +6,22 @@ export function Reality() {
       <div className="absolute inset-0 bg-gradient-to-br from-space-blue/8 via-brand-purple/5 to-transparent" />
       <div className="relative mx-auto max-w-4xl">
         <div className="text-center">
-          <h2 className="text-3xl font-bold leading-tight tracking-tight break-keep sm:text-4xl">
+          <h2 className="text-4xl font-bold leading-tight tracking-tight break-keep sm:text-5xl">
             {REALITY.title}
           </h2>
-          <p className="mt-4 text-lg leading-relaxed text-muted-foreground break-keep">
+          <p className="mt-6 text-xl leading-relaxed text-muted-foreground break-keep">
             {REALITY.subtitle}
           </p>
         </div>
 
-        <div className="mt-12 grid gap-6 sm:grid-cols-3">
+        <div className="mt-16 grid gap-8 sm:grid-cols-3">
           {REALITY.dataCards.map((card) => (
             <div
               key={card.stat}
               className="rounded-xl border border-border bg-card p-6 text-center"
             >
-              <p className="text-4xl font-bold text-gradient">{card.stat}</p>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground break-keep">
+              <p className="text-5xl font-bold text-gradient sm:text-6xl">{card.stat}</p>
+              <p className="mt-3 text-base leading-relaxed text-muted-foreground break-keep">
                 {card.description}
               </p>
             </div>
@@ -29,7 +29,7 @@ export function Reality() {
         </div>
 
         <div className="mt-10 text-center">
-          <p className="text-muted-foreground leading-relaxed break-keep whitespace-pre-line">
+          <p className="text-base font-medium text-muted-foreground leading-relaxed break-keep whitespace-pre-line">
             {REALITY.supporting}
           </p>
         </div>

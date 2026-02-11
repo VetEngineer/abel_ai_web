@@ -223,7 +223,7 @@ Apple HIG는 반투명 표면 위에 또 다른 반투명 표면을 겹치는 �
 | 레벨 | HTML 태그 | 페이지 당 사용 | Tailwind 크기 | 용도 |
 |------|----------|--------------|--------------|------|
 | H1 | `<h1>` | **1개만** | `text-4xl sm:text-5xl lg:text-6xl` | 페이지 주제 (Hero) |
-| H2 | `<h2>` | 섹션 당 1개 | `text-3xl sm:text-4xl` | 섹션 제목 |
+| H2 | `<h2>` | 섹션 당 1개 | `text-4xl sm:text-5xl` | 섹션 제목 |
 | H3 | `<h3>` | 섹션 내 서브 | `text-xl` ~ `text-2xl` | 카드 제목, 스텝 제목 |
 | H4 | `<h4>` | 선택적 | `text-xs uppercase tracking-wider` | 라벨 (예: "핵심 작업") |
 | P | `<p>` | 자유 | `text-base` / `text-sm` | 본문, 설명 |
@@ -239,7 +239,7 @@ Apple HIG는 반투명 표면 위에 또 다른 반투명 표면을 겹치는 �
 | `<h1>` | Hero.tsx — 1회 | 정상 |
 | `<h2>` | 각 섹션(Reality, Insight, Services, Process, Differentiators, FAQ, FinalCTA) — 각 1회 | 정상 |
 | `<h3>` | Services 카드 제목, Process 스텝 제목 | 정상 |
-| `<h4>` | Services "핵심 작업" 라벨, Process "당신이 받는 것" 라벨 | 정상 |
+| `<h4>` | (Collapsible 내부에서 사용, Process에서는 제거됨) | 정상 |
 
 ### 4.3 폰트 설정
 
@@ -252,7 +252,37 @@ Apple HIG는 반투명 표면 위에 또 다른 반투명 표면을 겹치는 �
 - **Geist Mono**: AEO, GEO, SEO 등 약어 및 코드에 사용
 - **한글 줄바꿈**: 모든 제목/본문에 `break-keep` 적용 필수 (음절 단위 끊김 방지)
 
-### 4.4 행간 + 자간
+### 4.4 LP 텍스트 크기 체계
+
+LP 페이지는 일반 웹 페이지보다 더 큰 텍스트 크기 체계를 사용한다.
+3초 내 핵심 메시지를 파악할 수 있어야 한다.
+
+| 레벨 | Tailwind 크기 | 실 크기 | 용도 |
+|------|-------------|--------|------|
+| H2 | `text-4xl sm:text-5xl` | 36-48px | 섹션 제목 |
+| Subtitle | `text-xl` | 20px | H2 보조 설명 |
+| Benefit/Emphasis | `text-lg` | 18px | 서비스 혜택, 통합 메시지 |
+| Description | `text-base` | 16px | 카드 설명, 본문 |
+| Supporting | `text-base font-medium` | 16px | 보조 설명 (bold) |
+| Label | `text-sm` | 14px | 트리거, 전환 훅 |
+
+### 4.5 LP 여백 체계
+
+| 위치 | Tailwind 간격 | 실 간격 | 용도 |
+|------|-------------|--------|------|
+| H2 ↔ Subtitle | `mt-6` | 24px | 제목과 보조 설명 사이 |
+| Subtitle ↔ 콘텐츠 | `mt-16` ~ `mt-20` | 64-80px | 섹션 헤더와 본문 사이 |
+| 카드 간 | `gap-8` | 32px | 그리드 카드 사이 |
+| 카드 내 섹션 간 | `mt-8` | 32px | 설명과 접기 영역 사이 |
+
+### 4.6 정보 밀도 원칙
+
+- **카드당 핵심 요소 4개 이하**: title → benefit → description → (접기 가능 상세)
+- **단계별 설명 통합**: deliverables를 description에 자연스럽게 녹여 별도 리스트 제거
+- **점진적 공개**: FAQ 6개 기본 표시 + 더보기, Services 핵심 작업 Collapsible
+- **수치 강조**: 데이터 중심 섹션(Reality)은 통계를 Hero급(`text-5xl sm:text-6xl`)으로
+
+### 4.7 행간 + 자간
 
 | 용도 | leading | tracking |
 |------|---------|----------|

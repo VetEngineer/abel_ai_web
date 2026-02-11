@@ -6,10 +6,10 @@ export function Differentiators() {
       <div className="absolute inset-0 bg-gradient-to-tr from-space-blue/8 via-transparent to-brand-purple/8" />
       <div className="relative mx-auto max-w-4xl">
         <div className="text-center">
-          <h2 className="text-3xl font-bold leading-tight tracking-tight break-keep sm:text-4xl">
+          <h2 className="text-4xl font-bold leading-tight tracking-tight break-keep sm:text-5xl">
             {DIFFERENTIATORS.title}
           </h2>
-          <p className="mt-4 leading-relaxed text-muted-foreground break-keep">
+          <p className="mt-6 text-xl leading-relaxed text-muted-foreground break-keep">
             {DIFFERENTIATORS.subtitle}
           </p>
         </div>
@@ -17,10 +17,10 @@ export function Differentiators() {
         <div className="mt-12 overflow-hidden rounded-xl border border-border bg-card">
           {/* Table header - Hidden on mobile, use visual indicators instead */}
           <div className="hidden sm:grid grid-cols-2 bg-card border-b border-border">
-            <div className="border-r border-border px-6 py-4 text-sm font-semibold text-muted-foreground">
+            <div className="border-r border-border px-6 py-4 text-base font-semibold text-muted-foreground">
               기존 방식
             </div>
-            <div className="px-6 py-4 text-sm font-semibold text-gradient">
+            <div className="px-6 py-4 text-base font-semibold text-gradient">
               ABEL AI
             </div>
           </div>
@@ -31,11 +31,11 @@ export function Differentiators() {
               key={i}
               className="grid grid-cols-1 sm:grid-cols-2 border-b border-border last:border-b-0"
             >
-              <div className="px-6 py-4 text-sm text-muted-foreground/70 line-through decoration-muted-foreground/40 sm:border-r border-border">
+              <div className="px-6 py-4 text-base text-muted-foreground/70 line-through decoration-muted-foreground/40 sm:border-r border-border">
                 <span className="inline-block sm:hidden text-xs font-semibold text-muted-foreground mb-1">기존 방식</span>
                 <span className="block">{row.before}</span>
               </div>
-              <div className="px-6 py-4 text-sm font-medium bg-primary/5">
+              <div className="px-6 py-4 text-base font-medium bg-primary/5">
                 <span className="inline-block sm:hidden text-xs font-semibold text-gradient mb-1">ABEL AI</span>
                 <span className="block">{row.after}</span>
               </div>
@@ -43,7 +43,7 @@ export function Differentiators() {
           ))}
         </div>
 
-        <p className="mt-10 text-center text-sm leading-relaxed text-muted-foreground break-keep whitespace-pre-line">
+        <p className="mt-10 text-center text-base leading-relaxed text-muted-foreground break-keep whitespace-pre-line">
           {DIFFERENTIATORS.supporting}
         </p>
 

@@ -15,12 +15,12 @@ export function FinalCTA() {
         <h2 className="text-3xl font-bold leading-tight tracking-tight break-keep sm:text-4xl md:text-5xl">
           {FINAL_CTA.title}
         </h2>
-        <p className="mt-4 text-lg leading-relaxed text-muted-foreground break-keep whitespace-pre-line">
+        <p className="mt-6 text-xl leading-relaxed text-muted-foreground break-keep whitespace-pre-line">
           {FINAL_CTA.subtitle}
         </p>
 
         <div className="mx-auto mt-8 max-w-md">
-          <ul className="space-y-3">
+          <ul className="space-y-4">
             {FINAL_CTA.checklist.map((item) => (
               <li key={item} className="flex items-start gap-3 text-sm">
                 <svg
