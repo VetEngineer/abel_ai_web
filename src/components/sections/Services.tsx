@@ -19,7 +19,7 @@ export function Services() {
                 <h3 className="text-2xl font-bold break-keep text-gradient">
                   {service.title}
                 </h3>
-                <p className="mt-3 text-base font-semibold text-foreground/90">
+                <p className="mt-3 text-base font-semibold text-foreground/90 break-keep">
                   {service.benefit}
                 </p>
               </div>

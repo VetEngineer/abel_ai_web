@@ -20,10 +20,10 @@ export function Insight() {
               key={card.term}
               className="rounded-xl border border-border bg-card p-8 transition-all duration-300 hover:border-primary/50 hover:glow-blue"
             >
-              <p className="text-lg font-semibold leading-relaxed">
+              <p className="text-lg font-semibold leading-relaxed break-keep">
                 {card.result}
               </p>
-              <p className="mt-4 text-sm leading-relaxed text-muted-foreground whitespace-pre-line">
+              <p className="mt-4 text-sm leading-relaxed text-muted-foreground break-keep whitespace-pre-line">
                 {card.description}
               </p>
               <p className="mt-6 text-xs font-mono text-muted-foreground/70">

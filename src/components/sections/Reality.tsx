@@ -21,7 +21,7 @@ export function Reality() {
               className="rounded-xl border border-border bg-card p-6 text-center"
             >
               <p className="text-4xl font-bold text-gradient">{card.stat}</p>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground break-keep">
                 {card.description}
               </p>
             </div>
