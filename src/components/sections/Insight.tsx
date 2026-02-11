@@ -6,10 +6,10 @@ export function Insight() {
       <div className="absolute inset-0 bg-gradient-to-bl from-brand-purple/5 via-transparent to-space-blue/5" />
       <div className="relative mx-auto max-w-6xl">
         <div className="text-center">
-          <h2 className="text-3xl font-bold tracking-tight break-keep sm:text-4xl">
+          <h2 className="text-3xl font-bold leading-tight tracking-tight break-keep sm:text-4xl">
             {INSIGHT.title}
           </h2>
-          <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-muted-foreground whitespace-pre-line">
+          <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-muted-foreground break-keep whitespace-pre-line">
             {INSIGHT.subtitle}
           </p>
         </div>
@@ -20,10 +20,10 @@ export function Insight() {
               key={card.term}
               className="rounded-xl border border-border bg-card p-8 transition-all duration-300 hover:border-primary/50 hover:glow-blue"
             >
-              <p className="text-lg font-semibold leading-relaxed">
+              <p className="text-lg font-semibold leading-relaxed break-keep">
                 {card.result}
               </p>
-              <p className="mt-4 text-sm leading-relaxed text-muted-foreground whitespace-pre-line">
+              <p className="mt-4 text-sm leading-relaxed text-muted-foreground break-keep whitespace-pre-line">
                 {card.description}
               </p>
               <p className="mt-6 text-xs font-mono text-muted-foreground/70">
@@ -33,7 +33,7 @@ export function Insight() {
           ))}
         </div>
 
-        <p className="mx-auto mt-12 max-w-xl text-center font-medium leading-relaxed whitespace-pre-line">
+        <p className="mx-auto mt-12 max-w-xl text-center font-medium leading-relaxed break-keep whitespace-pre-line">
           {INSIGHT.integration}
         </p>
 
