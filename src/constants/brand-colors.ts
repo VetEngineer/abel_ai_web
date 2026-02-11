@@ -14,5 +14,5 @@ export const BRAND_DESTRUCTIVE_HEX = "#e54444";
 /** --background: oklch(0.10 0.01 260) */
 export const BRAND_BACKGROUND_HEX = "#09090f";
 
-/** --foreground at 3% opacity — grid overlay */
-export const BRAND_GRID_LINE = "oklch(1 0 0 / 3%)";
+/** --foreground at 3% opacity — grid overlay (rgba for browser compat) */
+export const BRAND_GRID_LINE = "rgba(255, 255, 255, 0.03)";
