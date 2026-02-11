@@ -5,6 +5,9 @@ import { SITE, NAV_ITEMS } from "@/constants/content";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
+const BLUR_FALLBACK =
+  "bg-background/95 backdrop-blur-lg supports-[backdrop-filter:blur(0px)]:bg-background/80";
+
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -22,7 +25,7 @@ export function Header() {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
         scrolled
-          ? "bg-background/95 backdrop-blur-lg supports-[backdrop-filter:blur(0px)]:bg-background/80 border-b border-border"
+          ? `${BLUR_FALLBACK} border-b border-border`
           : "bg-transparent"
       )}
     >
@@ -77,7 +80,7 @@ export function Header() {
 
       {/* Mobile nav */}
       {mobileOpen && (
-        <nav className="flex flex-col gap-4 border-t border-border bg-background/95 backdrop-blur-lg supports-[backdrop-filter:blur(0px)]:bg-background/80 px-6 py-6 md:hidden">
+        <nav className={`flex flex-col gap-4 border-t border-border ${BLUR_FALLBACK} px-6 py-6 md:hidden`}>
           {NAV_ITEMS.map((item) => (
             <a
               key={item.href}
