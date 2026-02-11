@@ -6,13 +6,13 @@
  */
 
 /** --primary: oklch(0.55 0.18 250) */
-export const BRAND_PRIMARY_HEX = "#2563eb";
+export const BRAND_PRIMARY_HEX = "#0061e6";
 
 /** --destructive: oklch(0.704 0.191 22.216) */
-export const BRAND_DESTRUCTIVE_HEX = "#e54444";
+export const BRAND_DESTRUCTIVE_HEX = "#ff5757";
 
 /** --background: oklch(0.10 0.01 260) */
-export const BRAND_BACKGROUND_HEX = "#09090f";
+export const BRAND_BACKGROUND_HEX = "#050508";
 
 /** --foreground at 3% opacity — grid overlay (rgba for browser compat) */
 export const BRAND_GRID_LINE = "rgba(255, 255, 255, 0.03)";
