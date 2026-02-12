@@ -4,8 +4,16 @@ import { useState, useCallback, useRef, useEffect } from "react";
 import { HERO, HERO_MODES } from "@/constants/content";
 import { RING_COLORS } from "@/constants/brand-colors";
 import { Button } from "@/components/ui/button";
-import { SearchUniverse3D } from "@/components/shared/search-universe/SearchUniverse3D";
+import dynamic from "next/dynamic";
 import type { Mode } from "@/components/shared/search-universe/SearchUniverseRing";
+
+const SearchUniverse3D = dynamic(
+  () =>
+    import("@/components/shared/search-universe/SearchUniverse3D").then(
+      (mod) => mod.SearchUniverse3D
+    ),
+  { ssr: false }
+);
 
 const MODE_KEYS: Mode[] = ["SEO", "AEO", "GEO"];
 
