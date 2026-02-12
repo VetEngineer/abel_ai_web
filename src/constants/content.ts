@@ -256,6 +256,8 @@ export const DIFFERENTIATORS = {
 
 export const QUALIFICATION = {
   title: "이런 상황이라면 ABEL AI가 적합합니다",
+  fitForTitle: "이런 분에게 적합합니다",
+  notForTitle: "이런 경우에는 맞지 않습니다",
   fitFor: [
     "ChatGPT나 Perplexity에서 업종을 검색하면 경쟁사만 나온다",
     "콘텐츠를 만들고 있지만 실제 문의로 이어지지 않는다",

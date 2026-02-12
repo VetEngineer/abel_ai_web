@@ -25,6 +25,9 @@ export function RaycasterDetector({
   const raycaster = useRef(new THREE.Raycaster());
   const pointer = useRef(new THREE.Vector2());
   const prevHitId = useRef<string | null>(null);
+  const worldPos = useRef(new THREE.Vector3());
+  const cachedNodes = useRef<THREE.Mesh[]>([]);
+  const cacheValid = useRef(false);
 
   const handlePointerMove = useCallback((e: PointerEvent) => {
     const rect = gl.domElement.getBoundingClientRect();
@@ -41,6 +44,11 @@ export function RaycasterDetector({
     };
   }, [gl, handlePointerMove, hoveredNodeRef]);
 
+  // Invalidate node cache when group children change (mode switch)
+  useEffect(() => {
+    cacheValid.current = false;
+  }, [groupRef]);
+
   useFrame(() => {
     if (isDraggingRef.current || !groupRef.current) {
       if (prevHitId.current) {
@@ -53,14 +61,17 @@ export function RaycasterDetector({
 
     raycaster.current.setFromCamera(pointer.current, camera);
 
-    const nodes: THREE.Mesh[] = [];
-    groupRef.current.traverse((child) => {
-      if (child instanceof THREE.Mesh && child.userData.mode) {
-        nodes.push(child);
-      }
-    });
+    if (!cacheValid.current) {
+      cachedNodes.current = [];
+      groupRef.current.traverse((child) => {
+        if (child instanceof THREE.Mesh && child.userData.mode) {
+          cachedNodes.current.push(child);
+        }
+      });
+      cacheValid.current = true;
+    }
 
-    const intersects = raycaster.current.intersectObjects(nodes, false);
+    const intersects = raycaster.current.intersectObjects(cachedNodes.current, false);
 
     if (intersects.length > 0) {
       const hit = intersects[0].object as THREE.Mesh;
@@ -73,12 +84,11 @@ export function RaycasterDetector({
           index: hit.userData.nodeIndex as number,
         };
 
-        const worldPos = new THREE.Vector3();
-        hit.getWorldPosition(worldPos);
-        worldPos.project(camera);
+        hit.getWorldPosition(worldPos.current);
+        worldPos.current.project(camera);
         const rect = gl.domElement.getBoundingClientRect();
-        const screenX = ((worldPos.x + 1) / 2) * rect.width + rect.left;
-        const screenY = ((-worldPos.y + 1) / 2) * rect.height + rect.top;
+        const screenX = ((worldPos.current.x + 1) / 2) * rect.width + rect.left;
+        const screenY = ((-worldPos.current.y + 1) / 2) * rect.height + rect.top;
 
         onNodeHover?.(hit.userData.mode as Mode, { x: screenX, y: screenY });
       }

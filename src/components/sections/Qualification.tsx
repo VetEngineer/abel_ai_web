@@ -1,5 +1,6 @@
 import { Check, X } from "lucide-react";
 import { QUALIFICATION } from "@/constants/content";
+import { TransitionHook } from "@/components/shared/TransitionHook";
 
 export function Qualification() {
   return (
@@ -14,7 +15,7 @@ export function Qualification() {
           {/* Fit For */}
           <div>
             <h3 className="text-lg font-semibold text-primary">
-              이런 분에게 적합합니다
+              {QUALIFICATION.fitForTitle}
             </h3>
             <ul className="mt-6 space-y-4">
               {QUALIFICATION.fitFor.map((item) => (
@@ -31,7 +32,7 @@ export function Qualification() {
           {/* Not For */}
           <div>
             <h3 className="text-lg font-semibold text-muted-foreground/70">
-              이런 경우에는 맞지 않습니다
+              {QUALIFICATION.notForTitle}
             </h3>
             <ul className="mt-6 space-y-4">
               {QUALIFICATION.notFor.map((item) => (
@@ -46,14 +47,7 @@ export function Qualification() {
           </div>
         </div>
 
-        <div className="mt-16 flex justify-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-border/50 bg-card/50 px-4 py-2">
-            <div className="size-1.5 rounded-full bg-primary animate-pulse" />
-            <p className="text-sm text-muted-foreground">
-              {QUALIFICATION.transitionHook}
-            </p>
-          </div>
-        </div>
+        <TransitionHook text={QUALIFICATION.transitionHook} />
       </div>
     </section>
   );
