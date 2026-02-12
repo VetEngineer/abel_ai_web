@@ -1,11 +1,12 @@
 import { PROCESS } from "@/constants/content";
+import { TransitionHook } from "@/components/shared/TransitionHook";
 
 export function Process() {
   return (
-    <section id="process" className="relative scroll-mt-20 py-24 px-6">
+    <section id="process" className="relative scroll-mt-20 py-24 px-6" aria-labelledby="process-heading">
       <div className="absolute inset-0 bg-gradient-to-bl from-brand-purple/5 via-transparent to-space-blue/5" />
       <div className="relative mx-auto max-w-4xl">
-        <h2 className="text-center text-3xl font-bold leading-tight tracking-tight break-keep sm:text-4xl">
+        <h2 id="process-heading" className="text-center text-3xl font-bold leading-tight tracking-tight break-keep sm:text-4xl">
           {PROCESS.title}
         </h2>
         <p className="mx-auto mt-4 max-w-xl text-center leading-relaxed text-muted-foreground break-keep">
@@ -37,38 +38,15 @@ export function Process() {
                     </span>
                   )}
                 </div>
-                <p className="mt-2 leading-relaxed text-muted-foreground break-keep">
+                <p className="mt-2 leading-relaxed text-muted-foreground break-keep whitespace-pre-line">
                   {step.description}
                 </p>
-                <div className="mt-4">
-                  <h4 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                    당신이 받는 것
-                  </h4>
-                  <ul className="mt-2 space-y-1.5">
-                    {step.deliverables.map((item) => (
-                      <li
-                        key={item}
-                        className="flex items-start gap-2 text-sm text-muted-foreground"
-                      >
-                        <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-primary" />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
               </div>
             </div>
           ))}
         </div>
 
-        <div className="mt-8 flex justify-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-border/50 bg-card/50 px-4 py-2">
-            <div className="size-1.5 rounded-full bg-primary animate-pulse" />
-            <p className="text-sm text-muted-foreground">
-              {PROCESS.transitionHook}
-            </p>
-          </div>
-        </div>
+        <TransitionHook text={PROCESS.transitionHook} className="mt-8" />
       </div>
     </section>
   );
