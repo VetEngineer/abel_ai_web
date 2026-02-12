@@ -205,6 +205,6 @@ AEO(Answer Engine Optimization)는 "직접 답변"을 만듭니다. 사용자의
 
 ## 연락처
 
-- **무료 진단 요청**: https://abelai.kr/contact
+- **무료 진단 요청**: https://abelai.kr/#final-cta
 - **이메일**: (웹사이트에서 확인)
 - **응답 SLA**: 24-48시간 내 회신

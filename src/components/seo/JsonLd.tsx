@@ -1,5 +1,12 @@
 import { SITE, FAQ_ITEMS, SERVICES } from "@/constants/content";
 
+function safeJsonLdStringify(data: unknown): string {
+  return JSON.stringify(data)
+    .replace(/</g, "\\u003c")
+    .replace(/>/g, "\\u003e")
+    .replace(/&/g, "\\u0026");
+}
+
 function generateOrganizationSchema() {
   return {
     "@type": "Organization",
@@ -8,6 +15,17 @@ function generateOrganizationSchema() {
     description: SITE.description,
     foundingDate: "2025",
     areaServed: "KR",
+    contactPoint: {
+      "@type": "ContactPoint",
+      email: SITE.business.email,
+      contactType: "customer service",
+      availableLanguage: "Korean",
+    },
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: SITE.business.address,
+      addressCountry: "KR",
+    },
     knowsAbout: [
       "AEO (Answer Engine Optimization)",
       "GEO (Generative Engine Optimization)",
@@ -47,6 +65,7 @@ function generateServiceSchemas() {
     name: `${service.title} - ${service.subtitle}`,
     serviceType: service.title,
     description: service.benefit,
+    areaServed: { "@type": "Country", name: "KR" },
     provider: {
       "@type": "Organization",
       name: SITE.name,
@@ -71,7 +90,7 @@ export function JsonLd() {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(jsonLd) }}
     />
   );
 }
