@@ -17,6 +17,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://abelai.kr"),
   title: {
     default: "ABEL AI | AEO·GEO·SEO 통합 최적화 에이전시",
     template: "%s | ABEL AI",
@@ -50,6 +51,12 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
+  },
+  twitter: {
+    card: "summary",
+    title: "ABEL AI | AEO·GEO·SEO 통합 최적화 에이전시",
+    description:
+      "ChatGPT 답변에 없으면 매출도 없습니다. ABEL AI가 AEO·GEO·SEO로 신뢰·정확·전환을 만듭니다.",
   },
 };
 
