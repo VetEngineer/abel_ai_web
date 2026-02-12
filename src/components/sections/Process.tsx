@@ -1,4 +1,5 @@
 import { PROCESS } from "@/constants/content";
+import { TransitionHook } from "@/components/shared/TransitionHook";
 
 export function Process() {
   return (
@@ -45,14 +46,7 @@ export function Process() {
           ))}
         </div>
 
-        <div className="mt-8 flex justify-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-border/50 bg-card/50 px-4 py-2">
-            <div className="size-1.5 rounded-full bg-primary animate-pulse" />
-            <p className="text-sm text-muted-foreground">
-              {PROCESS.transitionHook}
-            </p>
-          </div>
-        </div>
+        <TransitionHook text={PROCESS.transitionHook} className="mt-8" />
       </div>
     </section>
   );
