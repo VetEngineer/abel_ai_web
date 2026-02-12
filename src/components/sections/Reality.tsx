@@ -2,11 +2,11 @@ import { REALITY } from "@/constants/content";
 
 export function Reality() {
   return (
-    <section className="relative scroll-mt-20 py-24 px-6 border-y border-border/30">
+    <section className="relative scroll-mt-20 py-24 px-6 border-y border-border/30" aria-labelledby="reality-heading">
       <div className="absolute inset-0 bg-gradient-to-br from-space-blue/8 via-brand-purple/5 to-transparent" />
       <div className="relative mx-auto max-w-4xl">
         <div className="text-center">
-          <h2 className="text-3xl font-bold leading-tight tracking-tight break-keep sm:text-4xl">
+          <h2 id="reality-heading" className="text-3xl font-bold leading-tight tracking-tight break-keep sm:text-4xl">
             {REALITY.title}
           </h2>
           <p className="mt-4 text-lg leading-relaxed text-muted-foreground break-keep">

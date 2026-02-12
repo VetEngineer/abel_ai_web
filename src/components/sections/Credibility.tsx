@@ -2,11 +2,11 @@ import { CREDIBILITY } from "@/constants/content";
 
 export function Credibility() {
   return (
-    <section id="credibility" className="relative scroll-mt-20 py-24 px-6">
+    <section id="credibility" className="relative scroll-mt-20 py-24 px-6" aria-labelledby="credibility-heading">
       <div className="absolute inset-0 bg-gradient-to-bl from-brand-purple/5 via-transparent to-space-blue/5" />
       <div className="relative mx-auto max-w-4xl">
         <div className="text-center">
-          <h2 className="text-4xl font-bold leading-tight tracking-tight break-keep sm:text-5xl">
+          <h2 id="credibility-heading" className="text-4xl font-bold leading-tight tracking-tight break-keep sm:text-5xl">
             {CREDIBILITY.title}
           </h2>
           <p className="mx-auto mt-6 max-w-2xl text-xl leading-relaxed text-muted-foreground break-keep whitespace-pre-line">

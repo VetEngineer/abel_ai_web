@@ -14,7 +14,7 @@ export function Footer() {
             </p>
           </div>
 
-          <nav className="flex gap-6">
+          <nav className="flex gap-6" aria-label="푸터 내비게이션">
             {NAV_ITEMS.map((item) => (
               <a
                 key={item.href}

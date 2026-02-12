@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef } from "react";
 import { HERO, HERO_MODES } from "@/constants/content";
 import { RING_COLORS } from "@/constants/brand-colors";
 import { Button } from "@/components/ui/button";
@@ -17,6 +17,7 @@ export function Hero() {
     x: number;
     y: number;
   } | null>(null);
+  const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
   const handleModeChange = useCallback(
     (newMode: Mode) => {
@@ -28,6 +29,23 @@ export function Hero() {
       }, 200);
     },
     [mode]
+  );
+
+  const handleTabKeyDown = useCallback(
+    (e: React.KeyboardEvent<HTMLButtonElement>, currentIndex: number) => {
+      let nextIndex: number | null = null;
+      if (e.key === "ArrowRight") {
+        nextIndex = (currentIndex + 1) % MODE_KEYS.length;
+      } else if (e.key === "ArrowLeft") {
+        nextIndex = (currentIndex - 1 + MODE_KEYS.length) % MODE_KEYS.length;
+      }
+      if (nextIndex !== null) {
+        e.preventDefault();
+        handleModeChange(MODE_KEYS[nextIndex]);
+        tabRefs.current[nextIndex]?.focus();
+      }
+    },
+    [handleModeChange]
   );
 
   const handleNodeHover = useCallback(
@@ -84,17 +102,21 @@ export function Hero() {
 
           {/* Mode Toggle */}
           <div className="mt-8 flex gap-2" role="tablist" aria-label="검색 최적화 모드 선택">
-            {MODE_KEYS.map((key) => {
+            {MODE_KEYS.map((key, index) => {
               const isActive = mode === key;
               const color = RING_COLORS[key];
               const data = HERO_MODES[key];
               return (
                 <button
                   key={key}
+                  ref={(el) => { tabRefs.current[index] = el; }}
                   role="tab"
                   aria-selected={isActive}
                   aria-label={data.ariaLabel}
+                  aria-controls="hero-mode-panel"
+                  tabIndex={isActive ? 0 : -1}
                   onClick={() => handleModeChange(key)}
+                  onKeyDown={(e) => handleTabKeyDown(e, index)}
                   className={`flex flex-col items-center gap-0.5 rounded-lg border px-4 py-2.5 transition-all ${
                     isActive
                       ? "border-current/50 bg-current/10"
@@ -118,7 +140,12 @@ export function Hero() {
           />
 
           {/* Context panel */}
-          <div className="h-[3.5rem] flex items-center" aria-live="polite">
+          <div
+            className="h-[3.5rem] flex items-center"
+            role="tabpanel"
+            id="hero-mode-panel"
+            aria-live="polite"
+          >
             <p
               className="text-sm text-muted-foreground break-keep transition-opacity duration-200"
               style={{ opacity: contextVisible ? 1 : 0 }}

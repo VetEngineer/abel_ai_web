@@ -3,10 +3,10 @@ import { QUALIFICATION } from "@/constants/content";
 
 export function Qualification() {
   return (
-    <section className="relative scroll-mt-20 py-24 px-6 border-y border-border/30">
+    <section className="relative scroll-mt-20 py-24 px-6 border-y border-border/30" aria-labelledby="qualification-heading">
       <div className="absolute inset-0 bg-gradient-to-tr from-space-blue/8 via-transparent to-brand-purple/8" />
       <div className="relative mx-auto max-w-4xl">
-        <h2 className="text-center text-4xl font-bold leading-tight tracking-tight break-keep sm:text-5xl">
+        <h2 id="qualification-heading" className="text-center text-4xl font-bold leading-tight tracking-tight break-keep sm:text-5xl">
           {QUALIFICATION.title}
         </h2>
 
