@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import { HERO, HERO_MODES } from "@/constants/content";
 import { RING_COLORS } from "@/constants/brand-colors";
 import { Button } from "@/components/ui/button";
@@ -18,17 +18,23 @@ export function Hero() {
     y: number;
   } | null>(null);
 
-  const handleModeChange = useCallback(
-    (newMode: Mode) => {
-      if (newMode === mode) return;
+  const timeoutRef = useRef<ReturnType<typeof setTimeout>>(undefined);
+
+  const handleModeChange = useCallback((newMode: Mode) => {
+    setMode((prev) => {
+      if (newMode === prev) return prev;
       setContextVisible(false);
-      setTimeout(() => {
-        setMode(newMode);
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = setTimeout(() => {
         setContextVisible(true);
       }, 200);
-    },
-    [mode]
-  );
+      return newMode;
+    });
+  }, []);
+
+  useEffect(() => {
+    return () => clearTimeout(timeoutRef.current);
+  }, []);
 
   const handleNodeHover = useCallback(
     (hoveredMode: Mode, screenPos: { x: number; y: number }) => {
