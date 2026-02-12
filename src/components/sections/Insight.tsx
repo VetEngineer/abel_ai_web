@@ -2,11 +2,11 @@ import { INSIGHT } from "@/constants/content";
 
 export function Insight() {
   return (
-    <section className="relative scroll-mt-20 py-24 px-6">
+    <section className="relative scroll-mt-20 py-24 px-6" aria-labelledby="insight-heading">
       <div className="absolute inset-0 bg-gradient-to-bl from-brand-purple/5 via-transparent to-space-blue/5" />
       <div className="relative mx-auto max-w-6xl">
         <div className="text-center">
-          <h2 className="text-3xl font-bold leading-tight tracking-tight break-keep sm:text-4xl">
+          <h2 id="insight-heading" className="text-3xl font-bold leading-tight tracking-tight break-keep sm:text-4xl">
             {INSIGHT.title}
           </h2>
           <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-muted-foreground break-keep whitespace-pre-line">
