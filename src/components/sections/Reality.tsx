@@ -14,7 +14,15 @@ export function Reality() {
           </p>
         </div>
 
-        <div className="mt-12 grid gap-6 sm:grid-cols-3">
+        {REALITY.pain && (
+          <div className="mt-8 text-center">
+            <p className="text-lg leading-relaxed text-foreground/80 break-keep whitespace-pre-line">
+              {REALITY.pain}
+            </p>
+          </div>
+        )}
+
+        <div className="mt-16 grid gap-8 sm:grid-cols-3">
           {REALITY.dataCards.map((card) => (
             <div
               key={card.stat}

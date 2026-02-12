@@ -1,0 +1,34 @@
+# ABEL AI - AI Crawler Access Policy
+# AI 크롤러 허용: ChatGPT, Claude, Perplexity, Google, Naver
+
+User-agent: *
+Allow: /
+
+# AI Crawlers - Explicitly Allowed
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Yeti
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# LLM-optimized documentation
+# https://llmstxt.org/
+# /llms.txt - Standard documentation
+# /llms-full.txt - Complete documentation
+
+Sitemap: https://abelai.kr/sitemap.xml

@@ -37,25 +37,9 @@ export function Process() {
                     </span>
                   )}
                 </div>
-                <p className="mt-2 leading-relaxed text-muted-foreground break-keep">
+                <p className="mt-2 leading-relaxed text-muted-foreground break-keep whitespace-pre-line">
                   {step.description}
                 </p>
-                <div className="mt-4">
-                  <h4 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                    당신이 받는 것
-                  </h4>
-                  <ul className="mt-2 space-y-1.5">
-                    {step.deliverables.map((item) => (
-                      <li
-                        key={item}
-                        className="flex items-start gap-2 text-sm text-muted-foreground"
-                      >
-                        <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-primary" />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
               </div>
             </div>
           ))}

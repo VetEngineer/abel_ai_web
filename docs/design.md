@@ -435,10 +435,31 @@ Apple HIG는 사용자가 투명도를 줄이는 접근성 설정을 존중할 �
 
 전환 훅의 `animate-pulse`와 카드의 `transition-all`은 이 설정을 존중해야 한다.
 
-### 7.6 3D 씬 (Hero)
-- `poster` 속성 필수
-- 모바일: 저해상도 + 그라데이션 오버레이 (`from-background/90 via-background/50 to-transparent`)
-- `prefers-reduced-motion: reduce` 시 정적 이미지로 대체 권장
+### 7.6 3D 씬 (Hero) — Search Universe
+
+코어 구체 + 3개 궤도 링(SEO/AEO/GEO) + 링당 4개 노드로 구성된 인터랙티브 3D 씬.
+
+**컴포넌트 구조**:
+```
+src/components/shared/search-universe/
+  SearchUniverse3D.tsx    — Canvas 래퍼 + 폴백 분기
+  SearchUniverseCore.tsx  — 코어 구체 + 글로우 + 후광
+  SearchUniverseRing.tsx  — 링 1개 + 노드 4개 (×3 재사용)
+  DragController.tsx      — 드래그 회전 + 관성/댐핑
+  RaycasterDetector.tsx   — 호버 레이캐스팅
+```
+
+**인터랙션**: Idle(자동 회전) + Hover(노드 확대/툴팁) + Drag(회전) + Mode Toggle(SEO/AEO/GEO)
+
+**폴백 분기**:
+- WebGL 미지원 / 모바일+reduced-motion → 정적 포스터
+- 3D 로딩 전 → 포스터 먼저 표시, 준비 완료 시 교체
+- `aria-hidden="true"` (장식 요소)
+
+**퍼포먼스**:
+- 모바일: DPR [1, 1.5], antialias false, powerPreference low-power
+- 데스크탑: DPR [1, 2], antialias true, powerPreference high-performance
+- 총 오브젝트 18개 (예산 25개 이내), 텍스처 0장
 
 ### 7.7 한글 접근성
 - `break-keep`: 음절 끊김 방지, 모든 한글 제목에 적용
