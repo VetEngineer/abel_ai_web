@@ -23,16 +23,29 @@ function checkWebGL(): boolean {
   }
 }
 
+// Cache snapshot to satisfy useSyncExternalStore's referential equality requirement
+let cachedSnapshot: DeviceCapability | null = null;
+
 function getSnapshot(): DeviceCapability {
-  return {
-    isMobile:
-      window.matchMedia("(pointer: coarse)").matches &&
-      window.innerWidth < 768,
-    prefersReducedMotion: window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches,
-    supportsWebGL: checkWebGL(),
-  };
+  const isMobile =
+    window.matchMedia("(pointer: coarse)").matches &&
+    window.innerWidth < 768;
+  const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+  const supportsWebGL = checkWebGL();
+
+  if (
+    cachedSnapshot &&
+    cachedSnapshot.isMobile === isMobile &&
+    cachedSnapshot.prefersReducedMotion === prefersReducedMotion &&
+    cachedSnapshot.supportsWebGL === supportsWebGL
+  ) {
+    return cachedSnapshot;
+  }
+
+  cachedSnapshot = { isMobile, prefersReducedMotion, supportsWebGL };
+  return cachedSnapshot;
 }
 
 function getServerSnapshot(): DeviceCapability {
