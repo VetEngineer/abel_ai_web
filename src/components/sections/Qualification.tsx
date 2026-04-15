@@ -4,7 +4,7 @@ import { TransitionHook } from "@/components/shared/TransitionHook";
 
 export function Qualification() {
   return (
-    <section className="relative scroll-mt-20 py-24 px-6 border-y border-border/30" aria-labelledby="qualification-heading">
+    <section className="relative scroll-mt-20 min-h-[80svh] flex flex-col justify-center py-20 px-6 border-y border-border/30" aria-labelledby="qualification-heading">
       <div className="absolute inset-0 bg-gradient-to-tr from-space-blue/8 via-transparent to-brand-purple/8" />
       <div className="relative mx-auto max-w-4xl">
         <h2 id="qualification-heading" className="text-center text-4xl font-bold leading-tight tracking-tight break-keep sm:text-5xl">
@@ -31,14 +31,14 @@ export function Qualification() {
 
           {/* Not For */}
           <div>
-            <h3 className="text-lg font-semibold text-muted-foreground/70">
+            <h3 className="text-lg font-semibold text-muted-foreground/80">
               {QUALIFICATION.notForTitle}
             </h3>
             <ul className="mt-6 space-y-4">
               {QUALIFICATION.notFor.map((item) => (
                 <li key={item} className="flex items-start gap-3">
-                  <X className="mt-0.5 size-5 shrink-0 text-muted-foreground/50" />
-                  <span className="text-base leading-relaxed text-muted-foreground/70 break-keep">
+                  <X className="mt-0.5 size-5 shrink-0 text-muted-foreground/60" />
+                  <span className="text-base leading-relaxed text-muted-foreground/80 break-keep">
                     {item}
                   </span>
                 </li>

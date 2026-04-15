@@ -3,13 +3,13 @@ import { TransitionHook } from "@/components/shared/TransitionHook";
 
 export function Process() {
   return (
-    <section id="process" className="relative scroll-mt-20 py-24 px-6" aria-labelledby="process-heading">
+    <section id="process" className="relative scroll-mt-20 min-h-[80svh] flex flex-col justify-center py-20 px-6" aria-labelledby="process-heading">
       <div className="absolute inset-0 bg-gradient-to-bl from-brand-purple/5 via-transparent to-space-blue/5" />
       <div className="relative mx-auto max-w-4xl">
         <h2 id="process-heading" className="text-center text-3xl font-bold leading-tight tracking-tight break-keep sm:text-4xl">
           {PROCESS.title}
         </h2>
-        <p className="mx-auto mt-4 max-w-xl text-center leading-relaxed text-muted-foreground break-keep">
+        <p className="mx-auto mt-4 max-w-xl text-center font-light leading-relaxed text-muted-foreground break-keep">
           {PROCESS.subtitle}
         </p>
 
@@ -38,7 +38,7 @@ export function Process() {
                     </span>
                   )}
                 </div>
-                <p className="mt-2 leading-relaxed text-muted-foreground break-keep whitespace-pre-line">
+                <p className="mt-2 font-light leading-relaxed text-muted-foreground break-keep whitespace-pre-line">
                   {step.description}
                 </p>
               </div>

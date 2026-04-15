@@ -3,14 +3,14 @@ import { TransitionHook } from "@/components/shared/TransitionHook";
 
 export function Credibility() {
   return (
-    <section id="credibility" className="relative scroll-mt-20 py-24 px-6" aria-labelledby="credibility-heading">
+    <section id="credibility" className="relative scroll-mt-20 min-h-[80svh] flex flex-col justify-center py-20 px-6" aria-labelledby="credibility-heading">
       <div className="absolute inset-0 bg-gradient-to-bl from-brand-purple/5 via-transparent to-space-blue/5" />
       <div className="relative mx-auto max-w-4xl">
         <div className="text-center">
           <h2 id="credibility-heading" className="text-4xl font-bold leading-tight tracking-tight break-keep sm:text-5xl">
             {CREDIBILITY.title}
           </h2>
-          <p className="mx-auto mt-6 max-w-2xl text-xl leading-relaxed text-muted-foreground break-keep whitespace-pre-line">
+          <p className="mx-auto mt-6 max-w-2xl text-xl font-light leading-relaxed text-muted-foreground break-keep whitespace-pre-line">
             {CREDIBILITY.subtitle}
           </p>
         </div>
@@ -20,12 +20,12 @@ export function Credibility() {
           {CREDIBILITY.antiHype.map((quote) => (
             <p
               key={quote}
-              className="text-lg text-muted-foreground/50 line-through decoration-muted-foreground/30"
+              className="text-lg text-muted-foreground/60 line-through decoration-muted-foreground/30"
             >
               {quote}
             </p>
           ))}
-          <p className="mt-6 text-base leading-relaxed text-foreground/80 break-keep whitespace-pre-line">
+          <p className="mt-6 text-base leading-relaxed text-foreground/90 break-keep whitespace-pre-line">
             {CREDIBILITY.antiHypeClosing}
           </p>
         </div>
@@ -40,13 +40,13 @@ export function Credibility() {
               <p className="text-4xl font-bold text-gradient">
                 {principle.stat}
               </p>
-              <p className="mt-1 text-xs text-muted-foreground/70">
+              <p className="mt-1 text-xs text-muted-foreground/80">
                 {principle.statLabel}
               </p>
               <h3 className="mt-6 text-lg font-semibold break-keep">
                 {principle.title}
               </h3>
-              <p className="mt-3 text-base leading-relaxed text-muted-foreground break-keep whitespace-pre-line">
+              <p className="mt-3 text-base font-light leading-relaxed text-muted-foreground break-keep whitespace-pre-line">
                 {principle.description}
               </p>
             </div>

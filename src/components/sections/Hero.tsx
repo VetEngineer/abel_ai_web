@@ -94,7 +94,7 @@ export function Hero() {
       {/* Text content — pointer-events-none so 3D canvas receives drag/hover */}
       <div className="pointer-events-none relative z-10 mx-auto flex h-full max-w-7xl items-center px-6 lg:px-8">
         <div className="pointer-events-auto flex max-w-xl flex-col items-start">
-          <h1 className="text-4xl font-bold leading-tight tracking-tight break-keep sm:text-5xl lg:text-6xl">
+          <h1 className="text-4xl font-bold leading-tight tracking-tight break-keep sm:text-5xl lg:text-[3.25rem]">
             {HERO.title.split("\n").map((line, i) => (
               <span key={i} className="block">
                 {i === 0 ? (
@@ -105,7 +105,7 @@ export function Hero() {
               </span>
             ))}
           </h1>
-          <p className="mt-6 max-w-lg text-lg leading-relaxed text-muted-foreground break-keep sm:text-xl">
+          <p className="mt-6 max-w-lg text-lg font-light leading-relaxed text-muted-foreground break-keep sm:text-xl">
             {HERO.subtitle.split("\n").map((line, i) => (
               <span key={i}>
                 {line}
@@ -171,13 +171,6 @@ export function Hero() {
           <Button size="lg" className="mt-6 text-lg px-8 py-6" asChild>
             <a href="#final-cta">{HERO.cta}</a>
           </Button>
-
-          <div className="mt-8 flex items-center gap-2 rounded-full border border-border/50 bg-card/50 px-4 py-2">
-            <div className="size-1.5 shrink-0 rounded-full bg-primary animate-pulse" />
-            <p className="text-sm text-muted-foreground">
-              {HERO.transitionHook}
-            </p>
-          </div>
         </div>
       </div>
 

@@ -2,7 +2,7 @@ import { SERVICES, SERVICES_SECTION } from "@/constants/content";
 
 export function Services() {
   return (
-    <section id="services" className="relative scroll-mt-20 py-24 px-6 border-y border-border/30">
+    <section id="services" className="relative scroll-mt-20 min-h-[80svh] flex flex-col justify-center py-20 px-6 border-y border-border/30">
       <div className="absolute inset-0 bg-gradient-to-tr from-space-blue/8 via-transparent to-brand-purple/8" />
       <div className="relative mx-auto max-w-6xl">
         <h2 className="text-center text-3xl font-bold leading-tight tracking-tight break-keep sm:text-4xl">
@@ -24,7 +24,7 @@ export function Services() {
                 </p>
               </div>
 
-              <p className="text-sm leading-relaxed text-muted-foreground break-keep">
+              <p className="text-base font-light leading-relaxed text-muted-foreground break-keep">
                 {service.description}
               </p>
 

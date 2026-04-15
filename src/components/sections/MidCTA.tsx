@@ -3,13 +3,13 @@ import { Button } from "@/components/ui/button";
 
 export function MidCTA() {
   return (
-    <section className="relative py-16 px-6">
+    <section className="relative py-20 px-6">
       <div className="absolute inset-0 bg-gradient-to-r from-space-blue/10 via-brand-purple/8 to-space-blue/10" />
       <div className="relative mx-auto max-w-2xl text-center">
         <h2 className="text-3xl font-bold leading-tight tracking-tight break-keep sm:text-4xl">
           {MID_CTA.title}
         </h2>
-        <p className="mt-4 text-lg leading-relaxed text-muted-foreground break-keep">
+        <p className="mt-4 text-lg font-light leading-relaxed text-muted-foreground break-keep">
           {MID_CTA.subtitle}
         </p>
         <Button size="lg" className="mt-8 text-lg px-8 py-6" asChild>

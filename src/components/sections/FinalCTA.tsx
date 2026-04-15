@@ -5,7 +5,7 @@ export function FinalCTA() {
   return (
     <section
       id="final-cta"
-      className="scroll-mt-20 relative py-24 px-6 overflow-hidden"
+      className="scroll-mt-20 relative py-20 px-6 overflow-hidden"
     >
       {/* Gradient background */}
       <div className="absolute inset-0 bg-gradient-to-br from-space-blue/20 via-brand-purple/10 to-space-blue/20" />
@@ -15,7 +15,7 @@ export function FinalCTA() {
         <h2 className="text-3xl font-bold leading-tight tracking-tight break-keep sm:text-4xl md:text-5xl">
           {FINAL_CTA.title}
         </h2>
-        <p className="mt-4 text-lg leading-relaxed text-muted-foreground break-keep whitespace-pre-line">
+        <p className="mt-4 text-lg font-light leading-relaxed text-muted-foreground break-keep whitespace-pre-line">
           {FINAL_CTA.subtitle}
         </p>
 
